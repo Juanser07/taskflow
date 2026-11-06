@@ -36,14 +36,18 @@ navegador ──:8080──▶  web (Nginx)  ──frontend-net──▶  api (F
 
 ## Cómo ejecutarlo
 
-Requisitos: Docker Desktop (o Docker Engine + Compose v2).
+Requisitos: Git y Docker Desktop (Windows / macOS) o Docker Engine + Compose v2 (Linux).
+No hace falta instalar Python, PostgreSQL ni Nginx: las imágenes se construyen en el equipo.
 
 ```bash
 git clone <url-del-repositorio> taskflow && cd taskflow
-cp .env.example .env              # variables de entorno (credenciales de la BD, secreto JWT)
+cp .env.example .env              # macOS/Linux  ·  Windows (PowerShell): Copy-Item .env.example .env
 docker compose up --build -d      # construye y levanta los 3 contenedores
 docker compose ps                 # db y api deben aparecer "healthy"
 ```
+
+> Los datos no viajan con el repositorio: una instalación nueva arranca con los datos de ejemplo.
+> Si el puerto 8080 está ocupado, cambia `WEB_PORT` en `.env`.
 
 - Aplicación: http://localhost:8080 (usuario demo `ana@taskflow.dev` / `taskflow123`)
 - Documentación interactiva de la API (Swagger): http://localhost:8080/api/docs
