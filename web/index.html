@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TaskFlow</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- ===== Pantalla de acceso ===== -->
+  <section id="auth-view" class="auth hidden">
+    <div class="auth-card">
+      <h1 class="logo">Task<span>Flow</span></h1>
+      <p class="muted">Gestor colaborativo de proyectos y tareas</p>
+      <div class="tabs">
+        <button class="tab active" data-mode="login">Iniciar sesión</button>
+        <button class="tab" data-mode="register">Registrarse</button>
+      </div>
+      <form id="auth-form">
+        <label class="register-only hidden">Nombre completo<input name="full_name" autocomplete="name"></label>
+        <label>Correo<input name="email" type="email" required autocomplete="email" value="ana@taskflow.dev"></label>
+        <label>Contraseña<input name="password" type="password" required minlength="6" autocomplete="current-password" value="taskflow123"></label>
+        <button class="btn primary" type="submit" id="auth-submit">Entrar</button>
+        <p class="error" id="auth-error"></p>
+      </form>
+      <p class="hint">Demo: <code>ana@taskflow.dev</code> / <code>taskflow123</code></p>
+    </div>
+  </section>
+
+  <!-- ===== Aplicación ===== -->
+  <section id="app-view" class="hidden">
+    <header class="topbar">
+      <h1 class="logo small">Task<span>Flow</span></h1>
+      <div class="topbar-right">
+        <span id="health" class="health" title="Estado API → base de datos">●</span>
+        <span id="user-name"></span>
+        <button class="btn ghost" id="logout">Salir</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <h2>Proyectos</h2>
+        <ul id="project-list"></ul>
+        <form id="project-form" class="stack">
+          <input name="name" placeholder="Nuevo proyecto" required minlength="2">
+          <button class="btn" type="submit">+ Crear</button>
+        </form>
+      </aside>
+
+      <main class="content">
+        <div id="empty" class="empty">Crea o selecciona un proyecto.</div>
+        <div id="board-wrap" class="hidden">
+          <div class="project-head">
+            <div>
+              <h2 id="project-name"></h2>
+              <p id="project-desc" class="muted"></p>
+            </div>
+            <button class="btn ghost" id="toggle-members">👥 Miembros</button>
+          </div>
+
+          <div class="stats">
+            <div class="progress"><div id="progress-bar"></div></div>
+            <span id="progress-text"></span>
+            <span class="pill" id="stat-total"></span>
+            <span class="pill danger" id="stat-overdue"></span>
+          </div>
+
+          <div id="members-panel" class="members hidden">
+            <ul id="member-list"></ul>
+            <form id="member-form" class="row owner-only">
+              <input name="email" type="email" placeholder="correo@ejemplo.com" required>
+              <button class="btn" type="submit">Agregar miembro</button>
+            </form>
+          </div>
+
+          <form id="task-form" class="row task-form">
+            <input name="title" placeholder="Nueva tarea…" required minlength="2">
+            <select name="priority">
+              <option value="low">Baja</option>
+              <option value="medium" selected>Media</option>
+              <option value="high">Alta</option>
+            </select>
+            <input name="due_date" type="date">
+            <select name="assignee_id" id="assignee-select"></select>
+            <button class="btn primary" type="submit">Agregar</button>
+          </form>
+
+          <div class="filters">
+            Prioridad:
+            <select id="filter-priority">
+              <option value="">Todas</option>
+              <option value="high">Alta</option>
+              <option value="medium">Media</option>
+              <option value="low">Baja</option>
+            </select>
+          </div>
+
+          <div class="board">
+            <div class="column" data-status="todo"><h3>Por hacer <span class="count"></span></h3><div class="cards"></div></div>
+            <div class="column" data-status="in_progress"><h3>En progreso <span class="count"></span></h3><div class="cards"></div></div>
+            <div class="column" data-status="done"><h3>Hecho <span class="count"></span></h3><div class="cards"></div></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <!-- ===== Detalle de tarea ===== -->
+  <dialog id="task-dialog">
+    <form method="dialog" class="dialog-close"><button class="btn ghost">✕</button></form>
+    <h3 id="dlg-title"></h3>
+    <p id="dlg-meta" class="muted"></p>
+    <p id="dlg-desc"></p>
+    <h4>Comentarios</h4>
+    <ul id="dlg-comments" class="comments"></ul>
+    <form id="comment-form" class="row">
+      <input name="content" placeholder="Escribe un comentario…" required>
+      <button class="btn" type="submit">Comentar</button>
+    </form>
+    <button class="btn danger" id="dlg-delete">Eliminar tarea</button>
+  </dialog>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
