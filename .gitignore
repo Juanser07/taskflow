@@ -1,0 +1,19 @@
+# Entorno y secretos
+.env
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+*.db
+
+# Sistema
+.DS_Store
+
+# Material del curso (no forma parte del código)
+*proyecto-20-de-20-software*.pdf
+
+# Archivos temporales de Word
+docs/~$*
