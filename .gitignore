@@ -12,8 +12,9 @@ __pycache__/
 # Sistema
 .DS_Store
 
-# Material del curso (no forma parte del código)
-*proyecto-20-de-20-software*.pdf
-
-# Archivos temporales de Word
-docs/~$*
+# Documentación académica de la entrega y material del curso
+# (se entregan por la plataforma del curso, no forman parte del software)
+docs/
+*.pdf
+*.docx
+~$*
