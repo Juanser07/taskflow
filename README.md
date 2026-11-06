@@ -40,7 +40,7 @@ Requisitos: Git y Docker Desktop (Windows / macOS) o Docker Engine + Compose v2 
 No hace falta instalar Python, PostgreSQL ni Nginx: las imágenes se construyen en el equipo.
 
 ```bash
-git clone <url-del-repositorio> taskflow && cd taskflow
+git clone https://github.com/camtorrado/taskflow.git && cd taskflow
 cp .env.example .env              # macOS/Linux  ·  Windows (PowerShell): Copy-Item .env.example .env
 docker compose up --build -d      # construye y levanta los 3 contenedores
 docker compose ps                 # db y api deben aparecer "healthy"
