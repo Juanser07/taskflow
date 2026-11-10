@@ -39,12 +39,29 @@ navegador ──:8080──▶  web (Nginx)  ──frontend-net──▶  api (F
 Requisitos: Git y Docker Desktop (Windows / macOS) o Docker Engine + Compose v2 (Linux).
 No hace falta instalar Python, PostgreSQL ni Nginx: las imágenes se construyen en el equipo.
 
-```bash
-git clone https://github.com/camtorrado/taskflow.git && cd taskflow
-cp .env.example .env              # macOS/Linux  ·  Windows (PowerShell): Copy-Item .env.example .env
-docker compose up --build -d      # construye y levanta los 3 contenedores
-docker compose ps                 # db y api deben aparecer "healthy"
+### Windows (PowerShell)
+
+```powershell
+git clone https://github.com/camtorrado/taskflow.git
+cd taskflow
+Copy-Item .env.example .env
+docker compose up --build -d
+docker compose ps
 ```
+
+### macOS / Linux
+
+```bash
+git clone https://github.com/camtorrado/taskflow.git
+cd taskflow
+cp .env.example .env
+docker compose up --build -d
+docker compose ps
+```
+
+El comando `docker compose up --build -d` construye las imágenes e inicia
+los tres servicios en segundo plano. Al ejecutar `docker compose ps`,
+los servicios `db` y `api` deben aparecer como `healthy`.
 
 > Los datos no viajan con el repositorio: una instalación nueva arranca con los datos de ejemplo.
 > Si el puerto 8080 está ocupado, cambia `WEB_PORT` en `.env`.
