@@ -5,15 +5,13 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Descargando codigo fuente desde GitHub...'
+                echo 'Obteniendo codigo del repositorio...'
                 checkout scm
             }
         }
 
-        // agregar stage aqui('Test')
-
-        // agregar stage aqui('Build')
-
-        // agregar stage aqui('Deploy')
+       // Pendiente: stage('Test') -> pruebas con pytest
+        // Pendiente: stage('Build') -> docker compose build
+        // Pendiente: stage('Deploy') -> despliegue de servicios
     }
 }
