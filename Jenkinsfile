@@ -10,7 +10,25 @@ pipeline {
             }
         }
 
-       // Pendiente: stage('Test') -> pruebas con pytest
+        stage('Test') {
+            steps {
+                echo 'Preparando entorno de pruebas...'
+
+                sh '''
+                    python3 -m venv .venv
+                    .venv/bin/python -m pip install --upgrade pip
+                    .venv/bin/python -m pip install -r api/requirements.txt
+                '''
+
+                echo 'Ejecutando pruebas automatizadas...'
+
+                sh '''
+                    cd api
+                    ../.venv/bin/python -m pytest -v
+                '''
+            }
+        }
+
         // Pendiente: stage('Build') -> docker compose build
         // Pendiente: stage('Deploy') -> despliegue de servicios
     }
