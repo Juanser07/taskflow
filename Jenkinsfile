@@ -29,7 +29,11 @@ pipeline {
             }
         }
 
-        // Pendiente: stage('Build') -> docker compose build
+        stage('Build') {
+	    steps {
+                sh 'docker compose build'
+	    }
+	}
         // Pendiente: stage('Deploy') -> despliegue de servicios
     }
 }
